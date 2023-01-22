@@ -1,7 +1,4 @@
-from pydantic import BaseModel, validator, Field
-import json
-from data import data, result
-
+from pydantic import BaseModel, Field
 
 class Address(BaseModel):
     region: str
@@ -18,12 +15,12 @@ class Address(BaseModel):
 class Salary(BaseModel):
     till: int = Field(alias='from')
     to: int
-    currency: str
-    gross: bool
-
+    currency: str = Field(exclude=True)
+    gross: bool = Field(exclude=True)
+   
 
 class Incoming_contacts(BaseModel):
-    full_name: str = Field(alias='fullName')
+    name: str = Field(alias='fullName')
     phone: str
     email: str
 
@@ -58,13 +55,9 @@ class Experience(BaseModel):
     id: str
 
 
-class Salary_range(BaseModel):
-    till: int = Field(alias='from')
-    to: int
-
-
 class Schedule(BaseModel):
     id: str
+
 
 class Result_data(BaseModel):
     address: str
@@ -79,14 +72,6 @@ class Result_data(BaseModel):
     image_url: str
     name: str
     salary: int
-    salary_range: Salary_range
+    salary_range: Salary
     schedule: Schedule
  
-
-
-incoming_data = Incoming_data.parse_raw(data)
-result_data = Result_data.
-print(incoming_data)
-
-
-
